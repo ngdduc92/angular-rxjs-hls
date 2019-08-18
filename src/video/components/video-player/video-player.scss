@@ -1,0 +1,11 @@
+$video-player-box-width: 640px;
+$video-player-box-height: 360px;
+$video-player-labels-height: calc(360px - 49px);
+.video-player {
+  width: $video-player-box-width;
+  height: $video-player-labels-height;
+  video {
+    width: $video-player-box-width;
+    height: $video-player-box-height;
+  }
+}

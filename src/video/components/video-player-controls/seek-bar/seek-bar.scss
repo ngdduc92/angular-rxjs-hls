@@ -1,0 +1,30 @@
+.seek-bar {
+  padding-bottom: 10px; 
+  #seek {
+    outline: 0;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    height: 3px;
+    cursor: pointer;
+    -webkit-appearance: none !important;
+  }
+  #seek::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: red;
+    transition: 0.5s ease-in-out forwards;
+    cursor: pointer;
+    opacity: 0;
+  }
+  #seek:hover::-webkit-slider-thumb {
+    opacity: 1;
+  }
+  #played-seek {
+    position: absolute;
+    background: red;
+    height: 3px;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="video-list-container">
+  <p class="mat-title">Up next</p>
+  <mat-list>
+    <mat-list-item *ngFor="let video of videoList">
+      <button mat-button (click)="setSelectedVideo(video)">
+        <i class="material-icons">play_arrow</i>
+        {{ video.title }}
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>

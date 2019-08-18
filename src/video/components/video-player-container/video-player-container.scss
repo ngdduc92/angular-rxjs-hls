@@ -1,0 +1,29 @@
+$video-player-box-width: 640px;
+$video-player-box-height: 360px;
+$video-player-controls-width: calc(640px - 4px);
+$video-player-controls-height: calc(50px - 3px);
+
+.video-player-container {
+  width: $video-player-box-width;
+  .video-player-box {
+    width: $video-player-box-width;
+    height: $video-player-box-height;
+    .video-player-controls {
+      position: absolute;
+      width: $video-player-controls-width;
+      height: $video-player-controls-height;
+      z-index: 60;
+      margin: 2px;
+      color: white;
+      background: rgba(0,0,0,0.7);
+      display:none;
+    }
+  }
+  .video-player-box:hover .video-player-controls {
+    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,10 @@
+.control-bottom-items {
+  height: 30px;
+  display: flex;
+  .control-bottom-item {
+    padding-right: 10px;
+  }
+  .control-bottom-item:first-child {
+    padding-left: 10px;
+  }
+}
