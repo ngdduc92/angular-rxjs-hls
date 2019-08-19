@@ -1,4 +1,5 @@
 <div class="seek-bar">
   <input id="seek" type="range" min="0" max={{duration}} value={{currentTime}} (input)="seekTo($event)">
-  <div id="played-seek" [style.width.%]="playedSeekWidth"></div>
+  <div id="seek-white"></div>
+  <div id="seek-red" [style.width.%]="seekRedWidth"></div>
 </div>

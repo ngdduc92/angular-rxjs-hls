@@ -40,6 +40,9 @@ export class VideoPlayerDirective {
       (data: any) => {
         this.setPlayback(data.status);
         this.seekTo(data.status, data.currentTime);
+        this.element.muted = data.muted;
+        this.element.volume = data.volume;
+        this.setFullScreen(data.fullScreenStatus);   
     });
     
     this.element.ondurationchange = () => {
@@ -61,6 +64,20 @@ export class VideoPlayerDirective {
         break;
       case PlayerStatus.PAUSED:
         this.element.pause();
+        break;
+      default:
+    }
+  }
+
+  setFullScreen(fullScreenStatus: boolean) {
+    if (fullScreenStatus) {
+      if (this.element.requestFullscreen) {
+        this.element.requestFullscreen();
+        this.store.dispatch(new PlayerActions.changeFullScreenStatus(false));
+      } else if (this.element.webkitSupportsFullscreen) {
+        this.element.webkitEnterFullScreen();
+        this.store.dispatch(new PlayerActions.changeFullScreenStatus(false));
+      }
     }
   }
 
@@ -71,19 +88,16 @@ export class VideoPlayerDirective {
   }
 
   establishHlsVideo(video: Video): void {
-    if (this.hls) {
-      this.hls.destroy();
-    }
-    this.hls = new HLS({
-      startLevel: 2,
-      capLevelToPlayerSize: true,
-    });
     if (HLS.isSupported()) {
+      if (this.hls) {
+        this.hls.destroy();
+      }
+      this.hls = new HLS({
+        startLevel: 2,
+        capLevelToPlayerSize: true,
+      });
       this.hls.attachMedia(this.element);
       this.hls.loadSource(video.src);
-        this.hls.on(HLS.Events.MANIFEST_PARSED, (event, data) => {
-          this.store.dispatch(new PlayerActions.setAvailableLevels(data.levels));
-        });
     }
   }
 

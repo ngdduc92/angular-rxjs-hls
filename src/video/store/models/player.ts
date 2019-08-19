@@ -12,5 +12,8 @@ export interface Player {
   selectedLevel?: any,
   levels?: any,
   currentTime?: number,
-  playIcon: string
+  playIcon: string,
+  muted: boolean,
+  volume: number,
+  fullScreenStatus: boolean
 }

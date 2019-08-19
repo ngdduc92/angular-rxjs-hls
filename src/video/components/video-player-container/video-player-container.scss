@@ -12,15 +12,15 @@ $video-player-controls-height: calc(50px - 3px);
       position: absolute;
       width: $video-player-controls-width;
       height: $video-player-controls-height;
-      z-index: 60;
+      z-index: 2147483647;
       margin: 2px;
       color: white;
       background: rgba(0,0,0,0.7);
-      display:none;
+      visibility: hidden;
     }
   }
   .video-player-box:hover .video-player-controls {
-    display: block;
+    visibility: visible;
   }
 
   @media screen and (max-width: 768px) {

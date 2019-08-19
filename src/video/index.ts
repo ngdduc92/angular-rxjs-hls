@@ -15,6 +15,8 @@ import { PlayVideoComponent } from './components/video-player-controls/play';
 import { NextVideoComponent } from './components/video-player-controls/next';
 import { SeekBarComponent } from './components/video-player-controls/seek-bar';
 import { TimeBoxComponent } from './components/video-player-controls/time-box';
+import { VolumeComponent } from './components/video-player-controls/volume';
+import { FullScreenComponent } from './components/video-player-controls/full-screen';
 
 
 
@@ -33,7 +35,9 @@ import { TimeBoxComponent } from './components/video-player-controls/time-box';
     PlayVideoComponent,
     NextVideoComponent,
     SeekBarComponent,
-    TimeBoxComponent
+    TimeBoxComponent,
+    VolumeComponent,
+    FullScreenComponent
   ],
   declarations: [
     VideoPlayerContainerComponent,
@@ -44,7 +48,9 @@ import { TimeBoxComponent } from './components/video-player-controls/time-box';
     PlayVideoComponent,
     NextVideoComponent,
     SeekBarComponent,
-    TimeBoxComponent
+    TimeBoxComponent,
+    VolumeComponent,
+    FullScreenComponent
   ]
 })
 export class VideoPlayerModule { }

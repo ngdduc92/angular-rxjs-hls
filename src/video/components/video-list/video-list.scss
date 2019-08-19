@@ -4,6 +4,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+  p {
+    width: 100%;
+    text-align: center;
+  }
 
   mat-list {
     text-align: center;

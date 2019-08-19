@@ -6,7 +6,10 @@ const initialState: Player = {
   selectedLevel: 0,
   duration: 0,
   currentTime: 0,
-  playIcon: 'play_arrow'
+  playIcon: 'play_arrow',
+  muted: false,
+  volume: 1,
+  fullScreenStatus: false
 }
 
 export const playerReducer = (state: Player = initialState, action: VideoPlayerActions.Actions) => {
@@ -15,12 +18,16 @@ export const playerReducer = (state: Player = initialState, action: VideoPlayerA
       return { ...state, status: action.payload };
     case VideoPlayerActions.CHANGE_PLAY_ICON:
       return { ...state, playIcon: action.payload };
-    case VideoPlayerActions.SET_PLAYER_LEVELS:
-      return { ...state, levels: action.payload }
     case VideoPlayerActions.SET_PLAYER_DURATION:
-      return { ...state, duration: action.payload }
+      return { ...state, duration: action.payload };
     case VideoPlayerActions.SET_PLAYER_CURRENT_TIME:
-      return { ...state, currentTime: action.payload }
+      return { ...state, currentTime: action.payload };
+    case VideoPlayerActions.CHANGE_VOLUME_STATUS:
+      return { ...state, muted: action.payload };
+    case VideoPlayerActions.SET_VOLUME:
+      return { ...state, volume: action.payload };
+    case VideoPlayerActions.CHANGE_FULL_SCREEN_STATUS:
+      return { ...state, fullScreenStatus: action.payload };
     default:
       return state;
   }

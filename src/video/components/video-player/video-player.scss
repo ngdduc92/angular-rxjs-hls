@@ -8,4 +8,7 @@ $video-player-labels-height: calc(360px - 49px);
     width: $video-player-box-width;
     height: $video-player-box-height;
   }
+  video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
 }

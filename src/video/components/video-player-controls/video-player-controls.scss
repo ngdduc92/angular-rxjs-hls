@@ -1,8 +1,30 @@
-.control-bottom-items {
+.control-bottom-items-left {
   height: 30px;
-  display: flex;
+  float: left;
+  width: 60%;
   .control-bottom-item {
+    float: left;
+    height: 30px;
     padding-right: 10px;
+  }
+  .control-bottom-item:first-child {
+    padding-left: 10px;
+  }
+  .volume {
+    display: none;
+  }
+  .mute:hover .volume {
+    display: block;
+  }
+}
+.control-bottom-items-right {
+  height: 30px;
+  width: 40%;
+  float: right;
+  .control-bottom-item {
+    float: right;
+    padding-right: 10px;
+    height: 30px;
   }
   .control-bottom-item:first-child {
     padding-left: 10px;

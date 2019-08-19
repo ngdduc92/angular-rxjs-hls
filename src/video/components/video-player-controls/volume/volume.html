@@ -1,0 +1,10 @@
+<div class="volume-box">
+  <div class="mute-btn" (click)="toogleMute()">
+    <i class="material-icons">{{icon}}</i>
+  </div>
+  <div class="volume-bar">
+    <input id="volume-slider" type="range" min="0" max="1" step="0.1" value={{volume}} (input)="setVolume($event)">
+    <div id="volume-white"></div>
+    <div id="volume-red" [style.width.px]="volumeRedWidth"></div>
+  </div>
+</div>

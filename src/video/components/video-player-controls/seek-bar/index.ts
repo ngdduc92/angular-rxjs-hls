@@ -15,7 +15,7 @@ export class SeekBarComponent implements OnInit {
 
   currentTime: number;
   duration: number;
-  playedSeekWidth: number;
+  seekRedWidth: number;
   playerStatus: PlayerStatus;
   playerState: Observable<any>;
 
@@ -24,11 +24,9 @@ export class SeekBarComponent implements OnInit {
   ngOnInit(){
     this.playerState = this.store.select(getPlayerState);
     this.playerState.subscribe((data: any) => {
-      if (data.status !== PlayerStatus.SEEKING) {
-        this.currentTime = data.currentTime;
-      }
+      this.currentTime = data.currentTime;
       this.duration = data.duration;
-      this.playedSeekWidth = 100*data.currentTime/data.duration;
+      this.seekRedWidth = 100*data.currentTime/data.duration;
       this.playerStatus = data.status;
     });
   }

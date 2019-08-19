@@ -8,6 +8,9 @@
     height: 3px;
     cursor: pointer;
     -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    z-index: 80;
+    background: transparent;
   }
   #seek::-webkit-slider-thumb {
     -webkit-appearance: none !important;
@@ -19,12 +22,33 @@
     cursor: pointer;
     opacity: 0;
   }
+  #seek::-moz-range-thumb {
+    -moz-appearance: none !important;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: red;
+    transition: 0.5s ease-in-out forwards;
+    cursor: pointer;
+    opacity: 0;
+  }
   #seek:hover::-webkit-slider-thumb {
     opacity: 1;
   }
-  #played-seek {
+  #seek:hover::-moz-range-thumb {
+    opacity: 1;
+  }
+  #seek-red, #seek-white {
     position: absolute;
-    background: red;
     height: 3px;
+  }
+  #seek-red {
+    background: red;
+    z-index: 70;
+  }
+  #seek-white {
+    background: white;
+    z-index: 60;
+    width: 100%;
   }
 }

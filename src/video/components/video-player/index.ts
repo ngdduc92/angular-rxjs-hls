@@ -14,7 +14,6 @@ import { Observable } from 'rxjs';
 export class VideoPlayerComponent implements OnInit  {
 
   status: PlayerStatus;
-  icon: string;
   playerState: Observable<any>;
 
   constructor(private store: Store<VideoPlayerState>) {}
@@ -23,7 +22,6 @@ export class VideoPlayerComponent implements OnInit  {
     this.playerState = this.store.select(getPlayerState);
     this.playerState.subscribe((data: any) => {
       this.status = data.status;
-      this.icon = data.playIcon;
     });
   }
 
