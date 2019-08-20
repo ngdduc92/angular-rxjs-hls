@@ -8,12 +8,12 @@ import * as VideoListActions from '../actions/video-list';
 
 const videoList: Video[] = [
     {
-      index: 0,
+      idx: 0,
       title: 'Video 1',
       src: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     },
     {
-      index: 1,
+      idx: 1,
       title: 'Video 2',
       src: 'https://test-streams.mux.dev/test_001/stream.m3u8'
     }

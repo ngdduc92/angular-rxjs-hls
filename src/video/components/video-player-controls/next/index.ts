@@ -3,7 +3,10 @@ import * as VideoActions from '../../../store/actions/selected-video';
 import { Store } from '@ngrx/store';
 import { VideoPlayerState } from '../../../store/state';
 import { Video } from '../../../store/models/video';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { getVideoListState, getSelectedVideoState } from '../../../store/reducers';
+import * as PlayerActions from '../../../store/actions/player';
+import { PlayerStatus } from '../../../store/models/player';
 
 @Component({
   selector: 'video-player-control-next',
@@ -12,24 +15,31 @@ import { Observable } from 'rxjs';
 })
 export class NextVideoComponent implements OnInit  {
 
-  state: Observable<any>;
+  videoListState: Observable<Video[]>;
+  selectedVideoState: Observable<Video>;
   videoList: Video[];
-  selectedVideo: Video;
+  selectedVideoIdx: number;
+  private subscription: Subscription = new Subscription();
 
   constructor(private store: Store<VideoPlayerState>) {}
 
-  ngOnInit(){
-    this.state = this.store.select('videoPlayer');
-    this.state.subscribe(
-      (data: VideoPlayerState) => {
-        this.videoList = data.videoList;
-        this.selectedVideo = data.selectedVideo;
-      }
-    )
+  ngOnInit() {
+    this.videoListState = this.store.select(getVideoListState);
+    this.selectedVideoState = this.store.select(getSelectedVideoState);
+    this.subscription.add(this.videoListState.subscribe(
+      (data: Video[]) => this.videoList = data
+    ));
+    this.subscription.add(this.selectedVideoState.subscribe(
+      (data: Video) => this.selectedVideoIdx = data.idx
+    ));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   nextVideo() {
-    const nextVideoIdx = this.selectedVideo.index < (this.videoList.length-1) ? this.selectedVideo.index+1 : 0;
+    const nextVideoIdx = this.selectedVideoIdx < (this.videoList.length-1) ? this.selectedVideoIdx+1 : 0;
     this.store.dispatch(new VideoActions.setSelectedVideo(this.videoList[nextVideoIdx]));
   }
 }

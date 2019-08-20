@@ -1,11 +1,11 @@
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-
 import { VideoPlayerState } from '../../store/state';
 import * as VideoListActions from '../../store/actions/video-list';
 import * as VideoActions from '../../store/actions/selected-video';
 import { Video } from '../../store/models/video';
+import { getVideoListState } from '../../store/reducers';
 
 @Component({
   selector: 'video-list',
@@ -15,23 +15,24 @@ import { Video } from '../../store/models/video';
 
 export class VideoListComponent implements OnInit {
 
-  state: Observable<any>;
+  videoListState: Observable<Video[]>;
   videoList: Video[];
-  selectedVideo: Video;
+  private subscription: Subscription;
 
-  constructor(private store: Store<VideoPlayerState>) {
-    this.store.dispatch(new VideoListActions.fetchVideoList());
+  constructor(private store: Store<VideoPlayerState>) { 
   }
 
   ngOnInit() {
-    this.state = this.store.select('videoPlayer');
-    this.state.subscribe(
-      (data: VideoPlayerState) => {
-        this.videoList = data.videoList;
-        this.selectedVideo = this.videoList[0];
-      }
-    )
-    this.store.dispatch(new VideoActions.setSelectedVideo(this.selectedVideo));
+    this.videoListState = this.store.select(getVideoListState);
+    this.subscription = this.videoListState.subscribe(
+      (data: Video[]) => this.videoList = data
+    );
+    this.store.dispatch(new VideoListActions.fetchVideoList());
+    this.store.dispatch(new VideoActions.setSelectedVideo(this.videoList[0]));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   setSelectedVideo(video: Video) {

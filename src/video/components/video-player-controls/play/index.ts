@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as PlayerActions from '../../../store/actions/player';
 import { Store } from '@ngrx/store';
-import { PlayerStatus } from '../../../store/models/player';
+import { PlayerStatus, Player } from '../../../store/models/player';
 import { VideoPlayerState } from '../../../store/state';
 import { getPlayerState } from '../../../store/reducers';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'video-player-control-play',
@@ -15,16 +15,23 @@ export class PlayVideoComponent implements OnInit  {
 
   status: PlayerStatus;
   icon: string;
-  playerState: Observable<any>;
+  playerState: Observable<Player>;
+  private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
 
   ngOnInit(){
     this.playerState = this.store.select(getPlayerState);
-    this.playerState.subscribe((data: any) => {
-      this.status = data.status;
-      this.icon = data.playIcon;
-    });
+    this.subscription = this.playerState.subscribe(
+      (data: Player) => {
+        this.status = data.status;
+        this.icon = data.playIcon;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   toogleVideo() {

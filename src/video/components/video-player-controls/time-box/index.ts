@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { VideoPlayerState } from '../../../store/state';
 import { getPlayerState } from '../../../store/reducers';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Player } from '../../../store/models/player';
 
 @Component({
   selector: 'video-player-control-time-box',
@@ -13,16 +14,23 @@ export class TimeBoxComponent implements OnInit {
 
   currentTime: string = '00:00';
   duration: string = '00:00';
-  playerState$: Observable<any>;
+  playerState: Observable<Player>;
+  private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
 
-  ngOnInit(){
-    this.playerState$ = this.store.select(getPlayerState);
-    this.playerState$.subscribe((data: any) => {
-      this.currentTime = this.timeFormat(data.currentTime);
-      this.duration = this.timeFormat(data.duration);
-    });
+  ngOnInit() {
+    this.playerState = this.store.select(getPlayerState);
+    this.subscription = this.playerState.subscribe(
+      (data: Player) => {
+        this.currentTime = this.timeFormat(data.currentTime);
+        this.duration = this.timeFormat(data.duration);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   timeFormat(time) {   

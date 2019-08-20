@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Video } from '../../store/models/video';
+import { Observable, Subscription } from 'rxjs';
 import { VideoPlayerState } from '../../store/state';
+import { getSelectedVideoState } from '../../store/reducers';
+import { Video } from '../../store/models/video';
 
 @Component({
   selector: 'video-player-container',
@@ -11,17 +12,20 @@ import { VideoPlayerState } from '../../store/state';
 })
 export class VideoPlayerContainerComponent {
 
-  state: Observable<any>;
-  video: Video;
+  selectedVideoState: Observable<Video>;
+  title: string;
+  private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
 
   ngOnInit() {
-    this.state = this.store.select('videoPlayer');
-    this.state.subscribe(
-      (val:any) => {
-        this.video = val.selectedVideo;
-      }
-    )
+    this.selectedVideoState = this.store.select(getSelectedVideoState);
+    this.subscription = this.selectedVideoState.subscribe(
+      (data: Video) => this.title = data ? data.title : ''
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

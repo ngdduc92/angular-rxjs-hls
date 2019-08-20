@@ -7,7 +7,7 @@ export enum VideoStatus {
 }
 
 export interface Video {
-  index: number,
+  idx: number,
   src:   string,
   title: string,
   levels?: any,

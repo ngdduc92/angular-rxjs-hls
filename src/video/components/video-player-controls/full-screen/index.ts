@@ -12,7 +12,10 @@ export class FullScreenComponent implements OnInit  {
 
   constructor(private store: Store<VideoPlayerState>) {}
 
-  ngOnInit(){
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
   }
 
   toogleFullScreen() {

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as PlayerActions from '../../../store/actions/player';
 import { Store } from '@ngrx/store';
 import { VideoPlayerState } from '../../../store/state';
-import { PlayerStatus } from '../../../store/models/player';
+import { PlayerStatus, Player } from '../../../store/models/player';
 import { getPlayerState } from '../../../store/reducers';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'video-player-control-seek-bar',
@@ -17,18 +17,25 @@ export class SeekBarComponent implements OnInit {
   duration: number;
   seekRedWidth: number;
   playerStatus: PlayerStatus;
-  playerState: Observable<any>;
+  playerState: Observable<Player>;
+  private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.playerState = this.store.select(getPlayerState);
-    this.playerState.subscribe((data: any) => {
-      this.currentTime = data.currentTime;
-      this.duration = data.duration;
-      this.seekRedWidth = 100*data.currentTime/data.duration;
-      this.playerStatus = data.status;
-    });
+    this.subscription = this.playerState.subscribe(
+      (data: Player) => {
+        this.currentTime = data.currentTime;
+        this.duration = data.duration;
+        this.seekRedWidth = 100*data.currentTime/data.duration;
+        this.playerStatus = data.status;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   seekTo(event: any) {

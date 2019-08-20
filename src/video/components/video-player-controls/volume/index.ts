@@ -3,7 +3,8 @@ import * as PlayerActions from '../../../store/actions/player';
 import { Store } from '@ngrx/store';
 import { VideoPlayerState } from '../../../store/state';
 import { getPlayerState } from '../../../store/reducers';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Player } from '../../../store/models/player';
 
 @Component({
   selector: 'video-player-control-volume',
@@ -16,18 +17,25 @@ export class VolumeComponent implements OnInit  {
   icon: string;
   volume: number;
   volumeRedWidth: number;
-  playerState: Observable<any>;
+  playerState: Observable<Player>;
+  private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.playerState = this.store.select(getPlayerState);
-    this.playerState.subscribe((data: any) => {
-      this.muted = data.muted;
-      this.icon = data.muted ? 'volume_off' : 'volume_up';
-      this.volume = data.volume;
-      this.volumeRedWidth = 90*data.volume;
-    });
+    this.subscription = this.playerState.subscribe(
+      (data: Player) => {
+        this.muted = data.muted;
+        this.icon = data.muted ? 'volume_off' : 'volume_up';
+        this.volume = data.volume;
+        this.volumeRedWidth = 90*data.volume;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   toogleMute() {
