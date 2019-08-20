@@ -1,14 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { playerReducer } from './player';
-import { videoListReducer } from './video-list';
-import { selectedVideoReducer } from './selected-video';
+import { playerReducer } from './player.reducer';
+import { videoListReducer } from './video-list.reducer';
+import { selectedVideoReducer } from './selected-video.reducer';
 import { VideoPlayerState } from '../state';
 
 export const reducers = {
   videoList: videoListReducer,
   selectedVideo: selectedVideoReducer,
   player: playerReducer
-}
+};
 
 export const getVideoPlayerState = createFeatureSelector<VideoPlayerState>('videoPlayer');
 export const getSelectedVideoState = createSelector(getVideoPlayerState, (state: VideoPlayerState) => state.selectedVideo);
