@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "serve:prod": "ng serve --prod",
-    "build": "ng build",
-    "build:prod": "ng build --prod",
+    "build": "ng build && tsc --outDir ./dist ./server.ts",
+    "build:prod": "ng build --prod && tsc --outDir ./dist ./server.ts",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "start": "node ./dist/server.js"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +28,9 @@
     "@ngrx/store-devtools": "6.0.1",
     "@types/hls.js": "0.8.1",
     "core-js": "2.5.4",
+    "express-serve-static-core": "^0.1.1",
     "hls.js": "0.9.1",
+    "moment": "^2.24.0",
     "rxjs": "6.0.0",
     "zone.js": "0.8.26"
   },
