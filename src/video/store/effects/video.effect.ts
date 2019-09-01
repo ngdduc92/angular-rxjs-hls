@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 import { Video } from '../models/video.model';
 import * as VideoListActions from '../actions/video-list.action';
 
-const videoList: Video[] = [
+const _videoList: Video[] = [
     {
       idx: 0,
       title: 'Video 1',
@@ -19,13 +19,22 @@ const videoList: Video[] = [
     }
   ];
 
+function getVideoList(): Observable<Video[]> {
+  return new Observable(subscriber => {
+    setTimeout(() => {
+      subscriber.next(_videoList);
+      subscriber.complete();
+    }, 100);
+  });
+}
 
 @Injectable()
 export class VideoEffects {
   @Effect()
   fetch$: Observable<Action> = this.actions$.pipe(
     ofType(VideoListActions.FETCH_VIDEO_LIST),
-    map(action => ({ type: VideoListActions.SET_VIDEO_LIST, payload: videoList }))
+    flatMap(getVideoList),
+    map(videoList => ({ type: VideoListActions.SET_VIDEO_LIST, payload: videoList }))
   );
 
   constructor(private actions$: Actions) {}
