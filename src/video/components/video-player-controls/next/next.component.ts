@@ -28,7 +28,7 @@ export class NextVideoComponent implements OnInit, OnDestroy {
       (data: Video[]) => this.videoList = data
     ));
     this.subscription.add(this.selectedVideoState.subscribe(
-      (data: Video) => this.selectedVideoIdx = data.idx
+      (data: Video) => this.selectedVideoIdx = data ? data.idx : 0
     ));
   }
 

@@ -28,7 +28,6 @@ export class VideoListComponent implements OnInit, OnDestroy {
       (data: Video[]) => this.videoList = data
     );
     this.store.dispatch(new VideoListActions.FetchVideoList());
-    this.store.dispatch(new VideoActions.SetSelectedVideo(this.videoList[0]));
   }
 
   ngOnDestroy() {

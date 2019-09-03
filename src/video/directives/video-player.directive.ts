@@ -45,13 +45,20 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
     this.playerState = this.store.select(getPlayerState);
 
     this.subscription.add(this.videoListState.subscribe(
-      (data: Video[]) => this.videoList = data
+      (data: Video[]) => {
+        this.videoList = data
+        if (data.length > 0 && !this.selectedVideo) {
+          this.store.dispatch(new VideoActions.SetSelectedVideo(this.videoList[0]));
+        }
+      }
     ));
     this.subscription.add(this.selectedVideoState.subscribe(
       (data: Video) => {
         this.selectedVideo = data;
         this.status = PlayerStatus.PAUSED;
-        this.establishHlsVideo(data);
+        if (this.selectedVideo) {
+          this.establishHlsVideo(this.selectedVideo);
+        }
       }
     ));
     this.subscription.add(this.playerState.subscribe(
