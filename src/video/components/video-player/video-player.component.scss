@@ -1,4 +1,4 @@
-.video-player {
+#video-player {
   width: 640px;
   height: 360px;
   position: relative;
@@ -16,10 +16,11 @@
     color: white;
     background: rgba(0,0,0,0.7);
     bottom: 0;
+    left: 0;
     visibility: hidden;
   }
 }
 
-.video-player:hover .video-player-controls {
+#video-player:hover .video-player-controls {
   visibility: visible;
 }

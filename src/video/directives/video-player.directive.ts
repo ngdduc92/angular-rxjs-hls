@@ -76,9 +76,6 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
         if (data.status === PlayerStatus.SEEKING) {
           this.element.currentTime = data.currentTime;
         }
-        if (data.fullScreenStatus) {
-          this.setFullScreen();
-        }
       }
     ));
   }
@@ -101,16 +98,6 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
         this.element.pause();
         break;
       default:
-    }
-  }
-
-  setFullScreen() {
-    if (this.element.requestFullscreen) {
-      this.element.requestFullscreen();
-      this.store.dispatch(new PlayerActions.ChangeFullScreenStatus(false));
-    } else if (this.element.webkitSupportsFullscreen) {
-      this.element.webkitEnterFullScreen();
-      this.store.dispatch(new PlayerActions.ChangeFullScreenStatus(false));
     }
   }
 
