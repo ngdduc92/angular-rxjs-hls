@@ -22,8 +22,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.playerState = this.store.select(getPlayerState);
     this.subscription = this.playerState.subscribe(
-      (data: Player) => this.status = data.status
-    );
+      (data: Player) => {
+        this.status = data.status
+        if (data.fullScreenStatus) {
+          this.enterFullScreen();
+        } else {
+          this.exitFullscreen();
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -37,6 +43,19 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(new PlayerActions.ChangePlayIcon('play_arrow'));
       this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PAUSED));
+    }
+  }
+
+  enterFullScreen() {
+    const element = document.getElementById('video-player');
+    if (!document.fullscreenElement) {
+      element.requestFullscreen();
+    }
+  }
+
+  exitFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
     }
   }
 }
