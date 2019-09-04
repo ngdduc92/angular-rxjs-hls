@@ -7,8 +7,6 @@ export const SET_PLAYER_DURATION = 'SET_PLAYER_DURATION';
 export const SET_PLAYER_CURRENT_TIME = 'SET_PLAYER_CURRENT_TIME';
 export const CHANGE_VOLUME_STATUS = 'CHANGE_VOLUME_STATUS';
 export const SET_VOLUME = 'SET_VOLUME';
-export const CHANGE_FULL_SCREEN_STATUS = 'CHANGE_FULL_SCREEN_STATUS';
-export const CHANGE_FULLSCREEN_ICON = 'CHANGE_FULLSCREEN_ICON';
 
 export class ChangePlayerStatus implements Action {
   readonly type = CHANGE_PLAYER_STATUS;
@@ -46,25 +44,11 @@ export class SetVolume implements Action {
   constructor(public payload: number) {}
 }
 
-export class ChangeFullScreenStatus implements Action {
-  readonly type = CHANGE_FULL_SCREEN_STATUS;
-
-  constructor(public payload: boolean) {}
-}
-
-export class ChangeFullScreenIcon implements Action {
-  readonly type = CHANGE_FULLSCREEN_ICON;
-
-  constructor(public payload: string) {}
-}
-
 export type Actions =
   ChangePlayerStatus      |
   ChangePlayIcon          |
   SetDuration             |
   SetCurrentTime          |
   ChangeVolumeStatus      |
-  SetVolume               |
-  ChangeFullScreenStatus  |
-  ChangeFullScreenIcon;
+  SetVolume;
 
