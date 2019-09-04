@@ -1,14 +1,25 @@
-$video-player-box-width: 640px;
-$video-player-box-height: 360px;
-$video-player-labels-height: calc(360px - 49px);
 .video-player {
-  width: $video-player-box-width;
-  height: $video-player-labels-height;
+  width: 640px;
+  height: 360px;
+  position: relative;
   video {
-    width: $video-player-box-width;
-    height: $video-player-box-height;
+    width: inherit;
+    height: inherit;
   }
   video::-webkit-media-controls-enclosure {
     display: none !important;
   }
+  .video-player-controls {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    color: white;
+    background: rgba(0,0,0,0.7);
+    bottom: 0;
+    visibility: hidden;
+  }
+}
+
+.video-player:hover .video-player-controls {
+  visibility: visible;
 }

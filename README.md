@@ -3,14 +3,9 @@ This is a small single page application (SPA) for playing videos with custom con
 @ngrx/store is a controlled state container designed to help write performant, consistent applications on top of Angular.  
 HLS is designed for reliability and dynamically adapts to network conditions by optimizing playback for the available speed of wired and wireless connections.  
 
-### Get the source
-To get the source code, follow the instructions below.
-```
-git clone https://github.com/ngdduc92/angular-rxjs-hls.git
-```
-
 ### Install libraries
 ```
+Unzip file 'angular-rxjs-hls'
 cd angular-rxjs-hls
 npm install
 ```
