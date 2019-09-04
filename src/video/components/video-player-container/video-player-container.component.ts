@@ -7,8 +7,7 @@ import { Video } from '../../store/models/video.model';
 
 @Component({
   selector: 'app-video-player-container',
-  templateUrl: './video-player-container.component.html',
-  styleUrls: ['./video-player-container.component.scss']
+  templateUrl: './video-player-container.component.html'
 })
 export class VideoPlayerContainerComponent implements OnInit, OnDestroy {
 
