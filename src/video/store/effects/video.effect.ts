@@ -16,6 +16,16 @@ const _videoList: Video[] = [
       idx: 1,
       title: 'Video 2',
       src: 'https://test-streams.mux.dev/test_001/stream.m3u8'
+    },
+    {
+      idx: 2,
+      title: 'Video 3',
+      src: 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'
+    },
+    {
+      idx: 3,
+      title: 'Video 4',
+      src: 'https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8'
     }
   ];
 
@@ -24,7 +34,7 @@ function getVideoList(): Observable<Video[]> {
     setTimeout(() => {
       subscriber.next(_videoList);
       subscriber.complete();
-    }, 100);
+    }, 2000);
   });
 }
 
