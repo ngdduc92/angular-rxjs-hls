@@ -13,6 +13,4 @@ export interface Player {
   playIcon: string;
   muted: boolean;
   volume: number;
-  fullScreenStatus: boolean;
-  fullscreenIcon: string;
 }

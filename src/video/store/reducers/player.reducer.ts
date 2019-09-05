@@ -7,9 +7,7 @@ const initialState: Player = {
   currentTime: 0,
   playIcon: 'play_arrow',
   muted: false,
-  volume: 1,
-  fullScreenStatus: false,
-  fullscreenIcon: 'fullscreen'
+  volume: 1
 };
 
 export function playerReducer(state: Player = initialState, action: VideoPlayerActions.Actions) {
@@ -26,10 +24,6 @@ export function playerReducer(state: Player = initialState, action: VideoPlayerA
       return { ...state, muted: action.payload };
     case VideoPlayerActions.SET_VOLUME:
       return { ...state, volume: action.payload };
-    case VideoPlayerActions.CHANGE_FULL_SCREEN_STATUS:
-      return { ...state, fullScreenStatus: action.payload };
-    case VideoPlayerActions.CHANGE_FULLSCREEN_ICON:
-      return { ...state, fullscreenIcon: action.payload };
     default:
       return state;
   }

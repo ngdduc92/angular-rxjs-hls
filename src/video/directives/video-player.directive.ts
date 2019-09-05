@@ -112,12 +112,6 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
       });
       this.hls.loadSource(video.src);
       this.hls.attachMedia(this.element);
-      this.hls.on(HLS.Events.MANIFEST_PARSED, () => {
-        this.element.play();
-        this.store.dispatch(new PlayerActions.ChangePlayIcon('pause'));
-        this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
-      });
     }
   }
-
 }
