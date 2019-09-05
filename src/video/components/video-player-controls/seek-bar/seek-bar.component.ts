@@ -16,8 +16,10 @@ export class SeekBarComponent implements OnInit, OnDestroy {
   currentTime: number;
   duration: number;
   seekRedWidth: number;
+  seekCircleRedLeft: object;
   playerStatus: PlayerStatus;
   playerState: Observable<Player>;
+  preSeekingPlayerStatus: PlayerStatus;
   private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {}
@@ -26,9 +28,10 @@ export class SeekBarComponent implements OnInit, OnDestroy {
     this.playerState = this.store.select(getPlayerState);
     this.subscription = this.playerState.subscribe(
       (data: Player) => {
+        this.seekRedWidth = 100 * data.currentTime / data.duration;
+        this.seekCircleRedLeft = { left: `calc(${this.seekRedWidth}% - 6px)`};
         this.currentTime = data.currentTime;
         this.duration = data.duration;
-        this.seekRedWidth = 100 * data.currentTime / data.duration;
         this.playerStatus = data.status;
       }
     );
@@ -38,14 +41,16 @@ export class SeekBarComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  seekTo(event: any) {
-    let playerStatus = this.playerStatus;
+  startSeek() {
+    this.preSeekingPlayerStatus = this.playerStatus;
     this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.SEEKING));
-    this.store.dispatch(new PlayerActions.SetCurrentTime(event.target.value));
-    if (Number(event.target.value) === this.duration) {
-      playerStatus = PlayerStatus.PAUSED;
-    }
-    this.store.dispatch(new PlayerActions.ChangePlayerStatus(playerStatus));
   }
 
+  seekTo(event: any) {
+    this.store.dispatch(new PlayerActions.SetCurrentTime(event.target.value));
+  }
+
+  endSeek() {
+    this.store.dispatch(new PlayerActions.ChangePlayerStatus(this.preSeekingPlayerStatus));
+  }
 }

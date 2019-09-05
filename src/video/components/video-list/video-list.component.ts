@@ -6,6 +6,8 @@ import * as VideoListActions from '../../store/actions/video-list.action';
 import * as VideoActions from '../../store/actions/selected-video.action';
 import { Video } from '../../store/models/video.model';
 import { getVideoListState } from '../../store/reducers';
+import * as PlayerActions from '../../store/actions/player.action';
+import { PlayerStatus } from '../../store/models/player.model';
 
 @Component({
   selector: 'app-video-list',
@@ -36,6 +38,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
 
   setSelectedVideo(video: Video) {
     this.store.dispatch(new VideoActions.SetSelectedVideo(video));
+    this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
   }
 
 }
