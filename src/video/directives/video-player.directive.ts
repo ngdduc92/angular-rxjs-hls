@@ -69,7 +69,7 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
         if (this.volume !== data.volume) {
           this.element.volume = data.volume;
         }
-        if (data.status !== PlayerStatus.SEEKING && this.status !== data.status) {
+        if (this.status !== data.status) {
           this.status = data.status;
           this.setPlayback(data.status);
         }
@@ -95,6 +95,9 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
         this.element.play();
         break;
       case PlayerStatus.PAUSED:
+        this.element.pause();
+        break;
+      case PlayerStatus.SEEKING:
         this.element.pause();
         break;
       default:

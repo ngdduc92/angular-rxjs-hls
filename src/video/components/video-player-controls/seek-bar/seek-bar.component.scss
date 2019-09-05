@@ -1,10 +1,10 @@
 .seek-bar {
+  position: relative;
   #seek {
     outline: 0;
     position: absolute;
     width: 100%;
-    margin: 0;
-    height: 3px;
+    height: 4px;
     cursor: pointer;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
@@ -15,18 +15,14 @@
     -webkit-appearance: none !important;
     height: 12px;
     width: 12px;
-    border-radius: 50%;
-    background: red;
-    transition: 0.5s ease-in-out forwards;
+    background: transparent;
     cursor: pointer;
   }
   #seek::-moz-range-thumb {
     -moz-appearance: none !important;
     height: 12px;
     width: 12px;
-    border-radius: 50%;
-    background: red;
-    transition: 0.5s ease-in-out forwards;
+    background: transparent;
     cursor: pointer;
   }
   #seek-red, #seek-white {
@@ -38,8 +34,18 @@
     z-index: 70;
   }
   #seek-white {
-    background: white;
+    background: rgba(255,255,255,0.3);
     z-index: 60;
     width: 100%;
+  }
+  #seek-circle-red {
+    position: absolute;
+    top: -4px;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: red;
+    transition: 0.5s ease-in-out forwards;
+    z-index: 70;
   }
 }

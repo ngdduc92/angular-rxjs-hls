@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 import { PlayerStatus } from '../models/player.model';
 
 export const CHANGE_PLAYER_STATUS = 'CHANGE_PLAYER_STATUS';
-export const CHANGE_PLAY_ICON = 'CHANGE_PLAY_ICON';
 export const SET_PLAYER_DURATION = 'SET_PLAYER_DURATION';
 export const SET_PLAYER_CURRENT_TIME = 'SET_PLAYER_CURRENT_TIME';
 export const CHANGE_VOLUME_STATUS = 'CHANGE_VOLUME_STATUS';
@@ -12,12 +11,6 @@ export class ChangePlayerStatus implements Action {
   readonly type = CHANGE_PLAYER_STATUS;
 
   constructor(public payload: PlayerStatus) {}
-}
-
-export class ChangePlayIcon implements Action {
-  readonly type = CHANGE_PLAY_ICON;
-
-  constructor(public payload: string) {}
 }
 
 export class SetDuration implements Action {
@@ -46,7 +39,6 @@ export class SetVolume implements Action {
 
 export type Actions =
   ChangePlayerStatus      |
-  ChangePlayIcon          |
   SetDuration             |
   SetCurrentTime          |
   ChangeVolumeStatus      |

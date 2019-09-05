@@ -25,7 +25,7 @@ export class PlayVideoComponent implements OnInit, OnDestroy {
     this.subscription = this.playerState.subscribe(
       (data: Player) => {
         this.status = data.status;
-        this.icon = data.playIcon;
+        this.icon = data.status === PlayerStatus.PLAYING ? 'pause' : 'play_arrow';
       }
     );
   }
@@ -35,12 +35,10 @@ export class PlayVideoComponent implements OnInit, OnDestroy {
   }
 
   toogleVideo() {
-    if (this.status === PlayerStatus.PAUSED) {
-      this.store.dispatch(new PlayerActions.ChangePlayIcon('pause'));
-      this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
-    } else {
-      this.store.dispatch(new PlayerActions.ChangePlayIcon('play_arrow'));
+    if (this.status === PlayerStatus.PLAYING) {
       this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PAUSED));
+    } else {
+      this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
     }
   }
 }

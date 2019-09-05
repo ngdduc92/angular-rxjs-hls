@@ -1,6 +1,6 @@
-<div id="video-player">
+<div id="video-player" (mousemove)="showControls()" (mouseout)="hideControls()" [style.cursor]="cursor">
   <video appVideoPlayer (click)="toogleVideo()"></video>
-  <div class="video-player-controls">
+  <div class="video-player-controls" [style.visibility]="controlsVisibility">
     <app-video-player-controls></app-video-player-controls>
   </div>
 </div>

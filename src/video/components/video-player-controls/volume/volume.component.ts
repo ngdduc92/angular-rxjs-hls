@@ -29,7 +29,7 @@ export class VolumeComponent implements OnInit, OnDestroy {
         this.muted = data.muted;
         this.icon = data.muted ? 'volume_off' : 'volume_up';
         this.volume = data.muted ? 0 : data.volume;
-        this.volumeRedWidth = data.muted ? 0 : 90 * data.volume;
+        this.volumeRedWidth = data.muted ? 0 : 100 * data.volume;
       }
     );
   }

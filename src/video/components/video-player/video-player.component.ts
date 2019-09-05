@@ -13,8 +13,11 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
 
+  controlsVisibility = 'visible';
+  cursor = 'default';
   status: PlayerStatus;
   playerState: Observable<Player>;
+  timer: any;
   private subscription: Subscription;
 
   constructor(private store: Store<VideoPlayerState>) {
@@ -31,12 +34,28 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   toogleVideo() {
-    if (this.status === PlayerStatus.PAUSED) {
-      this.store.dispatch(new PlayerActions.ChangePlayIcon('pause'));
-      this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
-    } else {
-      this.store.dispatch(new PlayerActions.ChangePlayIcon('play_arrow'));
+    if (this.status === PlayerStatus.PLAYING) {
       this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PAUSED));
+    } else {
+      this.store.dispatch(new PlayerActions.ChangePlayerStatus(PlayerStatus.PLAYING));
+    }
+  }
+
+  showControls() {
+    this.controlsVisibility = 'visible';
+    this.cursor = 'default';
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      if (this.status === PlayerStatus.PLAYING) {
+        this.controlsVisibility = 'hidden';
+        this.cursor = 'none';
+      }
+    }, 3000);
+  }
+
+  hideControls() {
+    if (this.status === PlayerStatus.PLAYING) {
+      this.controlsVisibility = 'hidden';
     }
   }
 }
