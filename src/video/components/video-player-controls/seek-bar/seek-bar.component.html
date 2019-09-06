@@ -1,7 +1,6 @@
 <div class="seek-bar">
-  <input id="seek" type="range" min="0" max={{duration}} value={{currentTime}}
-    (input)="seekTo($event)" (mousedown)="startSeek()" (mouseup)="endSeek()">
+  <input id="seek" type="range" min="0" max={{duration}} step="0.000000001" value={{currentTime}}
+    (input)="seekTo($event)" (mousedown)="startSeek()" (mouseup)="endSeek($event)">
   <div id="seek-white"></div>
   <div id="seek-red" [style.width.%]="seekRedWidth"></div>
-  <div id="seek-circle-red" [ngStyle]="seekCircleRedLeft"></div>
 </div>

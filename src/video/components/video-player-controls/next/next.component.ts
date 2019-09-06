@@ -19,7 +19,7 @@ export class NextVideoComponent implements OnInit, OnDestroy {
   selectedVideoState: Observable<Video>;
   videoList: Video[];
   selectedVideoIdx: number;
-  private subscription: Subscription = new Subscription();
+  private subscription = new Subscription();
 
   constructor(private store: Store<VideoPlayerState>) {}
 
