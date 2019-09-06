@@ -9,13 +9,13 @@ import * as VideoListActions from '../actions/video-list.action';
 const _videoList: Video[] = [
     {
       idx: 0,
-      title: 'Video 1',
-      src: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+      title: 'Arte China',
+      src: 'https://test-streams.mux.dev/test_001/stream.m3u8'
     },
     {
       idx: 1,
-      title: 'Video 2',
-      src: 'https://test-streams.mux.dev/test_001/stream.m3u8'
+      title: 'Big Buck Bunny',
+      src: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     }
   ];
 
