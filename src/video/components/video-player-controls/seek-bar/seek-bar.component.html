@@ -3,4 +3,5 @@
     (input)="seekTo($event)" (mousedown)="startSeek()" (mouseup)="endSeek($event)">
   <div id="seek-white"></div>
   <div id="seek-red" [style.width.%]="seekRedWidth"></div>
+  <div id="seek-circle-red" [ngStyle]="seekCircleRedLeft"></div>
 </div>

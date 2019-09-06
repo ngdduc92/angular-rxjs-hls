@@ -44,7 +44,7 @@ export class SeekBarComponent implements OnInit, OnDestroy {
       (data: Player) => {
         const newSeekRedWidth = data.duration > 0 ? 100 * data.currentTime / data.duration : 0;
         this.seekRedWidth = newSeekRedWidth <= 100 ? newSeekRedWidth : 100;
-        this.seekCircleRedLeft = { left: `calc(${this.seekRedWidth}% - 6px)`};
+        this.seekCircleRedLeft = { left: `calc(${this.seekRedWidth}% - 4px)`};
         this.currentTime = data.currentTime;
         this.duration = data.duration;
         this.playerStatus = data.status;
