@@ -21,6 +21,7 @@ export class FullScreenComponent {
   }
 
   setFullscreenIcon() {
+    this.fullscreenMode = !this.fullscreenMode;
     this.icon = this.icon === 'fullscreen' ? 'fullscreen_exit' : 'fullscreen';
   }
 
@@ -29,18 +30,14 @@ export class FullScreenComponent {
     if (!this.fullscreenMode) {
       if (element.requestFullscreen) {
         element.requestFullscreen();
-        this.fullscreenMode = true;
       } else if (element.webkitRequestFullScreen) {
         element.webkitRequestFullScreen();
-        this.fullscreenMode = true;
       }
     } else {
       if (this.doc.exitFullscreen) {
         this.doc.exitFullscreen();
-        this.fullscreenMode = false;
       } else if (this.doc.webkitCancelFullScreen) {
         this.doc.webkitCancelFullScreen();
-        this.fullscreenMode = false;
       }
     }
   }
