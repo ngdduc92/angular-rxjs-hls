@@ -33,18 +33,16 @@
       -webkit-appearance: none !important;
       height: 12px;
       width: 12px;
-      background: red;
+      background: transparent;
       cursor: pointer;
-      border-radius: 50%;
       border: none;
     }
     #volume-slider::-moz-range-thumb {
       -moz-appearance: none !important;
       height: 12px;
       width: 12px;
-      background: red;
+      background: transparent;
       cursor: pointer;
-      border-radius: 50%;
       border: none;
     }
     #volume-red, #volume-white {
@@ -57,9 +55,20 @@
       z-index: 70;
     }
     #volume-white {
-      background: rgba(255,255,255,0.3);
+      background: white;
       z-index: 60;
       width: 100%;
+    }
+    #volume-circle-red {
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: red;
+      transition: 0.5s ease-in-out forwards;
+      z-index: 70;
+      margin: 9.5px 0;
+      cursor: pointer;
     }
   }
 }
