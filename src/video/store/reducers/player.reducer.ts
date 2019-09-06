@@ -6,7 +6,7 @@ const initialState: Player = {
   duration: 0,
   currentTime: 0,
   muted: false,
-  volume: 1
+  volume: 0.5
 };
 
 export function playerReducer(state: Player = initialState, action: VideoPlayerActions.Actions) {

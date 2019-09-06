@@ -15,7 +15,7 @@ import { getVideoListState, getSelectedVideoState, getPlayerState } from '../sto
 export class VideoPlayerDirective implements OnInit, OnDestroy {
 
   private element: HTMLVideoElement;
-  private subscription: Subscription = new Subscription();
+  private subscription = new Subscription();
   hls: HLS;
   videoListState: Observable<Video[]>;
   selectedVideoState: Observable<Video>;

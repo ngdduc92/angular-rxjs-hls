@@ -3,6 +3,7 @@
   height: 360px;
   position: relative;
   video {
+    background: black;
     width: inherit;
     height: inherit;
   }
@@ -11,12 +12,11 @@
   }
   .video-player-controls {
     position: absolute;
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);
     height: 45px;
     color: white;
     background: rgba(0,0,0,0.7);
     bottom: 0;
     padding: 0 10px;
-    margin: 0 2px;
   }
 }
