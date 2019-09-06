@@ -35,7 +35,9 @@ export class VideoPlayerDirective implements OnInit, OnDestroy {
       this.store.dispatch(new PlayerActions.SetCurrentTime(this.element.currentTime));
     };
     this.element.onended = () => {
-      this.nextVideo(this.selectedVideo.idx);
+      if (this.status === PlayerStatus.PLAYING) {
+        this.nextVideo(this.selectedVideo.idx);
+      }
     };
   }
 
